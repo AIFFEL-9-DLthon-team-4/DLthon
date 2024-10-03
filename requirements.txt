@@ -1,0 +1,10 @@
+ipykernel
+numpy
+pandas
+matplotlib
+seaborn
+tensorflow
+torch
+transformers  # from 'HuggingFace'
+evaluate      # from 'HuggingFace'
+optuna        # Hyper-parameter optimizing
