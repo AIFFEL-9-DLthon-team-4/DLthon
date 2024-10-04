@@ -1,10 +1,14 @@
 
 
-
 # label
 id2label = {0: "협박", 1: "갈취", 2: "직장내괴롭힘", 3: "기타괴롭힘", 4: "일반대화"}
 label2id = {"협박": 0, "갈취": 1, "직장내괴롭힘": 2, "기타괴롭힘": 3, "일반대화": 4}
 num_labels = 5
+
+
+#libary
+from soynlp.normalizer import *
+import re
 
 
 
