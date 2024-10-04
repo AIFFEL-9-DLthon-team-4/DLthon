@@ -8,3 +8,4 @@ torch
 transformers  # from 'HuggingFace'
 evaluate      # from 'HuggingFace'
 optuna        # Hyper-parameter optimizing
+sentence-transformers
