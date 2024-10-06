@@ -15,6 +15,63 @@ khaiii_gc가 일반 대화 데이터셋
 
 ## 한글 맞춤법
 
+```
+class SpellChecker:
+    def __init__(self):
+        self.passport_key = None
+        self.base_url = None
+
+    def fetch_passport_key(self):
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36',
+            'Referer': 'https://search.naver.com/',
+        }
+        response = requests.get("https://search.naver.com/search.naver?query=%EB%A7%9E%EC%B6%A9%EB%B2%95%20%EA%B2%80%EC%82%AC%EA%B8%B0", headers=headers)
+        passport_key_match = re.search(r'(?<={new SpellingCheck\({API:{checker:").*?(?="},selector)', response.text)
+        if not passport_key_match:
+            return "Error: Unable to retrieve passport key"
+        self.base_url, self.passport_key = passport_key_match.group(0).split("?passportKey=")
+
+    def spell_check(self, text):
+        max_chunk_length = 100  # 최대 청크 길이 설정
+        chunks = [text[i:i + max_chunk_length] for i in range(0, len(text), max_chunk_length)]
+        checked_chunks = []
+
+        if self.passport_key is None or self.base_url is None:
+            self.fetch_passport_key()
+
+        for chunk in chunks:
+            payload = {
+                'passportKey': self.passport_key,
+                'where': 'nexearch',
+                'color_blindness': 0,
+                'q': chunk
+            }
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36',
+                'Referer': 'https://search.naver.com/',
+            }
+            try:
+                result_response = requests.get(self.base_url, headers=headers, params=payload)
+                result_response.raise_for_status()  # Raise an error for bad responses (4xx or 5xx)
+                checked_chunks.append(json.loads(result_response.text)['message']['result']['notag_html'])
+            except json.JSONDecodeError:
+                print("JSON Decode Error. Response text:", result_response.text)
+                return "Error: Invalid JSON response"
+            except requests.HTTPError as e:
+                print("HTTP Error:", e)
+                return "Error: HTTP request failed"
+            except Exception as e:
+                print("An error occurred:", e)
+                return "Error: An unexpected error occurred"
+
+        return ' '.join(checked_chunks)  # 청크들을 결합하여 최종 결과 반환
+
+
+```
+
+네이버 한글 맞춤법 검사기 api를 통해 맞춤법 검사, 단어의 수가 많아지면 431 error 발생하여 chunk 단위로 문자열 100씩 끊어서 검사 
+
 
 
 ## 데이터 전처리
