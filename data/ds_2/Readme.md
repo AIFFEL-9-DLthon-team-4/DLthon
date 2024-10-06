@@ -1,6 +1,15 @@
+## 필요한 column
+
+khaiii_train = train_df[['class', 'khaiii_text']]
+khaiii_gc = gc_df_sample[['Label','khaiii_text']]
+
+
+
 ## 일반 데이터 추가
 
 일반 데이터 4000개로 설정 -> 추후 더 필요하면 추가 할 예정
+
+
 
 
 
