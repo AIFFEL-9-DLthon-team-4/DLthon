@@ -1,6 +1,8 @@
 
 ## 일반 데이터 추가
 
+
+
 일반 데이터 5000개로 설정 
 
 khaiii_train이 주어진 데이터셋 
@@ -8,6 +10,9 @@ khaiii_train이 주어진 데이터셋
 khaiii_gc가 일반 대화 데이터셋 
 
 
+khaiii_train 문자열 최대 길이: 481
+
+khaiii_gc 문자열 최대 길이: 598
 
 
 ## 사용 함수
