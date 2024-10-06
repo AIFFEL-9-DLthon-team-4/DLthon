@@ -8,11 +8,13 @@ khaiii_train이 주어진 데이터셋
 khaiii_gc가 일반 대화 데이터셋 
 
 
-리드미 수정할게요...ㅠ
 
-한글 맞춤법
 
-특수문자, . 공백으로 바꿈
+## 사용 함수
+
+
+## 한글 맞춤법
+
 
 
 ## 데이터 전처리
@@ -25,6 +27,29 @@ khaiii_gc가 일반 대화 데이터셋
 한글, 영어, 구두점(.,?!), 숫자, 줄바꿈(\n)을 제외한 모든 문자를 공백으로 대체
 
 줄바꿈을 포함한 여러 공백을 하나의 공백으로 치환
+
+특수문자, . 공백으로 바꿈
+
+
+
+
+##  형태소 분석 filter
+
+```
+
+def filter_morphemes(morphs):
+    # 남길 태그
+    keep_tags = {'NNG', 'NNP', 'VV', 'VA', 'MAG'}
+    filtered = []
+
+    for morph in morphs:
+        if morph[1] in keep_tags:
+            filtered.append(morph)
+
+    return filtered
+
+
+```
 
 
 
@@ -47,9 +72,6 @@ khaiii_gc가 일반 대화 데이터셋
 
 
 
-
-
-## 사용 함수
 
 ## \n을 포함한 불필요한 문자 제거 전처리 함수
 
@@ -136,24 +158,17 @@ def retain_newline_only(pos_tags):
 ```
 
 
-
-
-## 수정 사항
-
- 단순히 train 데이터 셋만 보고 화자의 위치가 \n으로 이루어져 있어서 이 문자열이 필요한 줄 알아서 마지막 결과물에도 \n을 포함시켰지만 test 데이터셋에서는 .,?!이러한 문자들로 화자를 구분하여 \n을 제거해야 된다.
  
 
 
 ## 추가로 진행 해야 되는 상황
 
 
-1. 특수문자 정규화 부분 고려
+
+2. 형태소 분석한 token들에서 문맥에 맞는 새로운 dictiionaly 추가, -> 이름 같은경우 준, 하야 이런식으로 token이 분리되는 현상이 발생함, khaiii에서는 이런 부분이 없었음
 
 
-2. 형태소 분석한 token들에서 문맥에 맞는 새로운 dictiionaly 추가, -> 이름 같은경우 준, 하야 이런식으로 token이 분리되는 현상이 발생함
-
-
-3.  다른 형태소 분석 도구도 사용해보기 (khai, Komoran, Kkma, Hannanum)
+3.  다른 형태소 분석 도구도 사용해보기 ( Komoran, Kkma, Hannanum)
 
 
 
