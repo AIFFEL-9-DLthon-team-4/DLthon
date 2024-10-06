@@ -1,6 +1,8 @@
 ## 필요한 column
 
 khaiii_train = train_df[['class', 'khaiii_text']]
+
+
 khaiii_gc = gc_df_sample[['Label','khaiii_text']]
 
 
