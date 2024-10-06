@@ -1,20 +1,18 @@
-## 필요한 column
-
-khaiii_train = train_df[['class', 'khaiii_text']]
-
-
-khaiii_gc = gc_df_sample[['Label','khaiii_text']]
-
-
 
 ## 일반 데이터 추가
 
-일반 데이터 4000개로 설정 -> 추후 더 필요하면 추가 할 예정
+일반 데이터 5000개로 설정 
+
+khaiii_train이 주어진 데이터셋 
+
+khaiii_gc가 일반 대화 데이터셋 
 
 
+리드미 수정할게요...ㅠ
 
+## 한글 맞춤법
 
-
+특수문자, . 공백으로 바꿈
 
 
 ## 데이터 전처리
