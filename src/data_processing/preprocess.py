@@ -1,4 +1,6 @@
 
+from soynlp.normalizer import *
+import re
 
 # label
 id2label = {0: "협박", 1: "갈취", 2: "직장내괴롭힘", 3: "기타괴롭힘", 4: "일반대화"}
@@ -6,14 +8,8 @@ label2id = {"협박": 0, "갈취": 1, "직장내괴롭힘": 2, "기타괴롭힘"
 num_labels = 5
 
 
-#libary
-from soynlp.normalizer import *
-import re
 
-
-
-# 불필요한 문자열 제거 함수 
-
+# 불필요한 문자열 제거 함수
 def preprocess_sentence(sentence):
     sentence = sentence.lower().strip()
 
@@ -30,8 +26,7 @@ def preprocess_sentence(sentence):
     return sentence
 
 
-# 자음 모음 문자 정규화
-
+# 자음 모음 문자 정규화 - 'sonlp' 사용
 def normalize_korean_text(text):
     # \n 문자를 특별한 토큰으로 변환
     text = text.replace('\n', '<newline>')
@@ -45,10 +40,7 @@ def normalize_korean_text(text):
     return text
 
 
-
-
 # 불용어 제거 함수
-
 def remove_stopwords(text, stopwords):
     # 줄바꿈을 기준으로 문장을 나누기
     sentences = text.split('\n')
@@ -62,6 +54,4 @@ def remove_stopwords(text, stopwords):
     
     # 줄바꿈으로 다시 연결
     return '\n'.join(filtered_sentences)
-
-
 

@@ -1,6 +1,4 @@
-
-
-
+import logging
 from transformers import PreTrainedTokenizerFast, AutoTokenizer  # Tokenizer
 from transformers import GPT2ForSequenceClassification  # 1. GPT model import & initialization
 from transformers import BertForSequenceClassification  # 2. BERT model import & initialization
@@ -26,18 +24,26 @@ tokenizer = {
 
 
 model = {
-    "DialogRPT-updown": GPT2ForSequenceClassification.from_pretrained("microsoft/DialogRPT-updown",
-                                                                      num_labels=num_labels,
-                                                                      problem_type="multi_label_classification"),
+    # "DialogRPT-updown": GPT2ForSequenceClassification.from_pretrained("microsoft/DialogRPT-updown",
+    #                                                                   num_labels=num_labels,
+    #                                                                   problem_type="multi_label_classification"),
     
-    "bert-base-uncased-yelp-polarity": BertForSequenceClassification.from_pretrained("textattack/bert-base-uncased-yelp-polarity",
-                                                                                     num_labels=num_labels,
-                                                                                     problem_type="multi_label_classification"),
+    # "bert-base-uncased-yelp-polarity": BertForSequenceClassification.from_pretrained("textattack/bert-base-uncased-yelp-polarity",
+    #                                                                                  num_labels=num_labels,
+    #                                                                                  problem_type="multi_label_classification"),
+    
+    "kcbert-base": BertForSequenceClassification.from_pretrained("beomi/kcbert-base",
+                                                                 num_labels=num_labels,
+                                                                 ignore_mismatched_sizes=True,
+                                                                 vocab_size = 30000),
 }
     
     
+def get_bert_model():
+    return BertForSequenceClassification.from_pretrained("beomi/kcbert-base",
+                                                         num_labels=num_labels,
+                                                         ignore_mismatched_sizes=True,
+                                                         vocab_size = 30000)
 
 
-
-
-#inputs = tokenizer("Hello, my dog is cute", return_tensors="pt")
+logging.info(get_bert_model())

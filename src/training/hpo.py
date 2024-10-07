@@ -45,5 +45,3 @@ class HyperParmeterOptimize:
             n_trials=20,
             compute_objective=f1_metric_results,  # 기본값은 [`~trainer_utils.default_compute_objective`] 함수로 설정
         )
-    
-    best_trials = get_best_trials()
