@@ -8,3 +8,8 @@ torch
 transformers  # from 'HuggingFace'
 evaluate      # from 'HuggingFace'
 optuna        # Hyper-parameter optimizing
+sentence-transformers
+soynlp    # 한국어 분석
+datasets
+tf-keras
+accelerate==0.34.2  # Colab과 동일 버전
